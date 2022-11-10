@@ -2,7 +2,8 @@ extends layout
 
 block content
   h1= title
-  - let results=[{elephant_type:'indian_elephant', elephant_age_limit:50, elephant_weight:8800} ,{elephant_type:'African-bush-elephant', elephant_age_limit: 70 , elephant_weight :13000}, {elephant_type:'Borneo-elephant', elephant_age_limit: 75 , elephant_weight :4000} ]
+  //-let results=[{elephant_type:'indian_elephant', elephant_age_limit:50, elephant_weight:8800} ,{elephant_type:'African-bush-elephant', elephant_age_limit: 70 , elephant_weight :13000}, {elephant_type:'Borneo-elephant', elephant_age_limit: 75 , elephant_weight :4000} ]
+  let items = results
   div(class="container-fluid")
   div(class="row")
   each value,index in results
