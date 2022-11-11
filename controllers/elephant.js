@@ -3,9 +3,16 @@ var Elephant = require('../models/elephant');
 exports.elephant_list = function (req, res) {
     res.send('NOT IMPLEMENTED: Elephant list');
 };
-// for a specific Elephant.
-exports.elephant_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: Elephant detail: ' + req.params.id);
+/// for a specific Costume.
+exports.elephant_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await Elephant.findById(req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
 // Handle Elephant create on POST.
 exports.elephant_create_post = function (req, res) {
@@ -34,19 +41,19 @@ exports.elephant_list = async function (req, res) {
 
 // VIEWS
 // Handle a show all view
-exports.elephant_view_all_Page = async function(req, res) {
-    try{
-    theElephants = await Elephant.find();
-    res.render('elephant', { title: 'Elephant Search Results', results: theElephants });
+exports.elephant_view_all_Page = async function (req, res) {
+    try {
+        theElephants = await Elephant.find();
+        res.render('elephant', { title: 'Elephant Search Results', results: theElephants });
     }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
-   };
+};
 
-   // Handle Costume create on POST.
-exports.elephant_create_post = async function(req, res) {
+// Handle Costume create on POST.
+exports.elephant_create_post = async function (req, res) {
     console.log(req.body)
     let document = new Elephant();
     // We are looking for a body, since POST does not have query parameters.
@@ -56,12 +63,33 @@ exports.elephant_create_post = async function(req, res) {
     document.elephant_type = req.body.elephant_type;
     document.elephant_age_limit = req.body.elephant_age_limit;
     document.elephant_weight = req.body.elephant_weight;
-    try{
-    let result = await document.save();
-    res.send(result);
+    try {
+        let result = await document.save();
+        res.send(result);
     }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
-   };
+};
+
+// Handle Costume update form on PUT.
+exports.elephant_update_put = async function(req, res) {
+ console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+ try {
+ let toUpdate = await Elephant.findById( req.params.id)
+ // Do updates of properties
+ if(req.body.elephant_type)
+ toUpdate.elephant_type = req.body.elephant_type;
+ if(req.body.elephant_age_limit) toUpdate.elephant_age_limit = req.body.elephant_age_limit;
+ if(req.body.elephant_weight) toUpdate.elephant_weight = req.body.elephant_weight;
+ let result = await toUpdate.save();
+ console.log("Sucess " + result)
+ res.send(result)
+ } catch (err) {
+ res.status(500)
+ res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
+};
