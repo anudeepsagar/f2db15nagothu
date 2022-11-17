@@ -2,6 +2,10 @@ extends layout
  
 block content 
   h1= title 
+  if(toshow==null)
+     h2 No instance to Details 
+  else 
+
  
   - let elephantid = toShow._id 
   - let elephant_type = toShow.elephant_type 

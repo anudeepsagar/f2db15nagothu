@@ -11,3 +11,11 @@ a {
   background-color: aquamarine; 
   width: 120px; 
 } 
+.elephantStyle { 
+  background-color: rgb(71, 39, 187); 
+  width: 150px; 
+  text-shadow: 1px,1px,1px;
+  font-size: large;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+} 
+

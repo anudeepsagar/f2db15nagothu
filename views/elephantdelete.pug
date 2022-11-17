@@ -2,10 +2,11 @@ extends layout
  
 block content 
   h1= title 
- 
-  if (toShow == null) 
-    h2 No instance to delete 
+
+  if(toshow==null)
+     h2 No instance to Details 
   else 
+
     - let elephantid = toShow._id 
     - let elephant_type = toShow.elephant_type 
     - let elephant_age_limit = toShow.elephant_age_limit 
@@ -14,16 +15,16 @@ block content
     script let actionid = "#{actionid}" 
     div 
       div.row 
-        div(class='elephantAttr mr-3') Elephant ID is: 
+        div(class='elephantStyle mr-3') Elephant ID is: 
         div #{elephantid} 
       div.row 
-        div(class='elephantAttr mr-3')  elephant_type is: 
+        div(class='elephantStyle mr-3')  elephant_type is: 
         div #{elephant_type} 
       div.row 
-        div(class='elephantAttr mr-3')  elephant_age_limit is: 
+        div(class='elephantStyle mr-3')  elephant_age_limit is: 
         div #{elephant_age_limit} 
       div.row 
-        div(class='elephantAttr mr-3') elephant_weight  is: 
+        div(class='elephantStyle mr-3') elephant_weight  is: 
         div #{elephant_weight} 
  
     button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
