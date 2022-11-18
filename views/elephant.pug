@@ -2,14 +2,27 @@ extends layout
 
 block content
   h1= title
-  //-let results=[{elephant_type:'indian_elephant', elephant_age_limit:50, elephant_weight:8800} ,{elephant_type:'African-bush-elephant', elephant_age_limit: 70 , elephant_weight :13000}, {elephant_type:'Borneo-elephant', elephant_age_limit: 75 , elephant_weight :4000} ]
-  let items = results
   div(class="container-fluid")
+  // - let results=[{colour:"red",cost:77,height :5},{colour:"blue",cost:99,height :7},{colour:"blue",cost:23.2 ,height:5}]
+  - let items = results 
+    div(class="container-fluid") 
+  div(class="row") 
+    each item in items  
+      - let destination = `dispatch(\"/elephant/update?id=${item._id}\")` 
+        div(class="row-sm-2", class="m-1") Item #{item.elephant_type}(#{item.elephant_age_limit}) is #{item.elephant_weight} 
+         button.btn( class="btn-primary ml-1", onclick= destination) Update 
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    } 
   div(class="row")
-  each value,index in results
-    div(class="col-sm-2" onclick=`buy(${index})`)  #{value.elephant_type} elephant , age #{value.elephant_age_limit}, with weight #{value.elephant_weight}
+    each value,index in results
+        div(class="col-sm-2" onclick=`buy(${index})`)  elephant #{value.elephant_type} , cost #{value.elephant_age_limit}, height  #{value.elephant_weight}
   script.
     function buy(index)
     {
-      alert(`Your elephant type ${index+1}`)
+      alert(`Your purchased Item ${index+1}`)
     }
+
+ 
+ 
